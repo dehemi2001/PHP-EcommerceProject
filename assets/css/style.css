@@ -1,4 +1,3 @@
-
 /* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap'); */
 
 .nav-buttons{
@@ -205,6 +204,14 @@ button:hover{
     transform: translateY(50px);
     opacity: 0;
     transition: 0.3s all;
+    color: #fff;
+}
+
+.shop-buy-btn{
+    background-color: #fb774b;
+    opacity: 1;
+    color: #fff;
+    text-decoration: none;
 }
 
 .product:hover .buy-btn{
@@ -212,8 +219,8 @@ button:hover{
     opacity: 1;
 }
 
-/*Deepseek Code*/
-.product-info {
+/*Deepseek Code (commented out due to a suggestion of Gemini Code Assist*/
+/* .product-info {
     display: flex;
     align-items: center;
 }
@@ -224,7 +231,7 @@ button:hover{
 
 .product-info p, .product-info small, .product-info a {
     margin: 0;
-}
+} */
 
 hr{
     width: 30px;
@@ -358,87 +365,100 @@ footer .copyright img{
 
 /* Cart */
 
-.cart table{
+.cart table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed; /* Crucial: fixed table layout */
 }
 
-.cart .product_info{
+.cart .product-info {
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
 }
 
-.cart th{
+.cart .product-info img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover; /* Ensure the image fits properly */
+    flex-shrink: 0; /* Prevent the image from shrinking */
+}
+
+.cart .product-info div {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1; /* Allow the div to grow and take available space */
+}
+.cart .product-info div form{
+    width: 100%;
+}
+.cart th {
     text-align: left;
     padding: 5px 10px;
     color: #fff;
     background-color: #fb774b;
 }
 
-.cart td{
+.cart td {
     padding: 10px 20px;
+    vertical-align: middle; /* Align content in the middle of the cell */
 }
 
-.cart td img{
-    width: 80px;
-    height: 80px;
-    margin-right: 10px;
-}
-
-.cart td input{
+.cart td input {
     width: 40px;
     height: 30px;
     padding: 5px;
 }
 
-.cart td a{
-    color: #fb774b;
-}
-
-.cart .remove-btn{
+.cart .remove-btn {
     color: #fb774b;
     text-decoration: none;
     font-size: 14px;
     background-color: #fff;
     border: none;
-    width: 100%;
+    width: auto; /* change this for auto*/
+    cursor: pointer;
 }
 
-.cart .edit-btn{
+.cart .edit-btn {
     color: #fb774b;
     text-decoration: none;
     font-size: 15px;
     background-color: #fff;
     border: none;
+    cursor: pointer;
 }
 
-.cart .product-info p{
-    margin: 3px;
+.cart .product-info p,
+.cart .product-info small {
+    margin: 3px 0; /* Adjusted margin */
+    display: block; /* added display block to each element*/
+    overflow: hidden;  /* Enable text overflow handling */
+    text-overflow: ellipsis; /* Add ellipsis for overflow */
 }
 
-.cart-total{
+.cart-total {
     display: flex;
     justify-content: flex-end;
 }
 
-.cart-total table{
+.cart-total table {
     width: 100%;
     max-width: 500px;
     border-top: 3px solid #fb774b;
 }
 
-td:last-child{
+td:last-child {
     text-align: right;
 }
 
-th:last-child{
+th:last-child {
     text-align: right;
 }
 
-.checkout-btn{
-    background-color: #fb774b;
-    color: #fff;
-}
+
 
 /* Login */
 #login-form{
@@ -514,20 +534,22 @@ th:last-child{
     border-collapse: collapse;
 }
 
-.orders .product_info{
-    display: flex;
-    flex-wrap: wrap;
+.orders .product-info{
+    display: flex; /* Changed to flex */
+    align-items: center; /* Vertically center items */
+    gap: 10px; /* Add some spacing between image and text */
+    flex-wrap: wrap; /* Keep the existing flex-wrap */
 }
 
 .orders th{
-    text-align: left;
-    padding: 5px 10px;
+    padding: 5px 20px;
     color: #fff;
     background-color: #fb774b;
+    /* text-align: left; */
 }
 
 .orders th:nth-child(2){
-    text-align: right;
+    /* text-align: right; */
 }
 
 .orders td{
@@ -539,6 +561,19 @@ th:last-child{
     height: 80px;
     margin-right: 10px;
 }
+
+.orders .order-details-btn{
+    color: #fff;
+    background-color: #fb774b;
+}
+
+/* Checkout */
+#checkout-form .checkout-small-element{
+    display: inline-block;
+    width: 48%;
+    margin: 10px auto;
+}
+
 
 /* Checkout */
 #checkout-form .checkout-small-element{
@@ -566,4 +601,3 @@ th:last-child{
 #contact span{
     color: #fb774b;
 }
-    
