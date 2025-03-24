@@ -1,0 +1,95 @@
+/* General styles for all admin pages */
+body {
+    font-family: sans-serif;
+    /* Example general style */
+    /* Add other general styles here */
+}
+
+/* Styles specific to the login page */
+.login-page {
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.login-page .login-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+.login-page .error-message {
+    color: red;
+    margin-top: 10px;
+    text-align: center;
+}
+
+
+
+
+/* Custom styles for the side menu */
+.side-menu {
+    height: 100vh;
+    width: 250px;
+    position: fixed;
+    top: 56px;
+    /* Height of the navbar */
+    left: 0;
+    background-color: #343a40;
+    padding-top: 20px;
+}
+
+.side-menu a {
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+}
+
+.side-menu a:hover {
+    background-color: #495057;
+}
+
+.main-content {
+    margin-left: 250px;
+    /* Width of the side menu */
+    padding: 20px;
+}
+
+
+
+/* styles for the add_product */
+.content {
+    margin-top: 50px; /* Adjust to avoid overlap with navbar */
+    margin-left: 220px; /* Adjust to accommodate the side menu */
+    padding: 20px;
+}
+.side-menu {
+    width: 200px;
+    position: fixed;
+    height: 100%;
+    top: 56px; /* Adjust to align with navbar */
+    left: 0;
+    background: #343a40;
+    padding-top: 20px;
+}
+.side-menu a {
+    display: block;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+}
+.side-menu a:hover {
+    background: #495057;
+}
+
+/* Add this CSS to ensure the button text stays on one line */
+.btn-warning {
+    white-space: nowrap;
+}
