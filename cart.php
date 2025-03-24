@@ -1,5 +1,6 @@
+<?php include('layouts/header.php'); ?>
+
 <?php
-session_start();
 
 if (isset($_POST["add_to_cart"])) {
     //if user has already added a product to cart
@@ -82,21 +83,27 @@ calculateTotalCart();
 
 function calculateTotalCart()
 {
-    $total = 0;
+    $total_price = 0;
+    $total_quantity = 0;
+    
     // Check if the cart exists and is an array before attempting to iterate.
     if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
         foreach ($_SESSION['cart'] as $key => $value) {
+
             $product = $_SESSION['cart'][$key];
+
             $price = $product['product_price'];
             $quantity = $product['product_quantity'];
-            $total = $total + $price * $quantity;
+
+            $total_price = $total_price + $price * $quantity;
+            $total_quantity = $total_quantity + $quantity;
+            
         }
     }
-    $_SESSION['total'] = $total;
+    $_SESSION['total'] = $total_price;
+    $_SESSION['quantity'] = $total_quantity;
 }
 ?>
-
-<?php include('layouts/header.php'); ?>
 
 <!--Cart-->
 <section class="cart container my-5 py-5">
@@ -124,7 +131,6 @@ function calculateTotalCart()
                             <div>
                                 <p><?php echo $value['product_name']; ?></p>
                                 <small><span>LKR </span><?php echo $value['product_price']; ?></small>
-                                <br>
                                 <form method="POST" action="cart.php">
                                     <input type="hidden" name="product_id" value="<?php echo $value['product_id']; ?>">
                                     <input type="submit" name="remove_product" class="remove-btn" value="remove">

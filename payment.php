@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+include('layouts/header.php');
 
 if(isset($_POST['order_pay_btn'])){
     $order_status = $_POST['order_status'];
@@ -8,8 +8,6 @@ if(isset($_POST['order_pay_btn'])){
 }
 
 ?>
-
-<?php include('layouts/header.php'); ?>
 
 <!--Payment-->
 <section class="my-5 py-5">

@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+include('layouts/header.php');
 
 if(!empty($_SESSION['cart'])){
 
@@ -14,8 +14,6 @@ if(!empty($_SESSION['cart'])){
 }
 
 ?>
-
-<?php include('layouts/header.php'); ?>
 
     <!--Checkout-->
     <section class="my-5 py-5">

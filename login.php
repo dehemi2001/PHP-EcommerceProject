@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+include('layouts/header.php');
 
 include('server/connection.php');
 
@@ -43,8 +43,6 @@ if(isset($_POST['login_btn'])){
 }
 
 ?>
-
-<?php include('layouts/header.php'); ?>
 
 <!--Login-->
 <section class="my-5 py-5">

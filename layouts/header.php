@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,7 +24,7 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 fixed-top">
 
     <div class="container">
-      <img class="logo" src="assets/imgs/Untitled-1.png">
+      <img class="logo" src="assets/imgs/logo.png">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -38,7 +41,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#">Blog</a>
+            <a class="nav-link" href="https://www.facebook.com/people/SolidComputers-Negombo/100057675990991/">Blog</a>
           </li>
 
           <li class="nav-item">
@@ -46,7 +49,12 @@
           </li>
 
           <li class="nav-item">
-            <a href="cart.php"><i class="fa-solid fa-bag-shopping"></i></a>
+            <a href="cart.php"><i class="fa-solid fa-bag-shopping">
+                <?php if (isset($_SESSION['quantity']) && $_SESSION['quantity'] != 0) { ?>
+                  <span class="cart-quantity"> <?php echo $_SESSION['quantity']; ?> </span>
+                <?php } ?>
+              </i>
+            </a>
             <a href="account.php"><i class="fa-solid fa-user"></i></a>
           </li>
 

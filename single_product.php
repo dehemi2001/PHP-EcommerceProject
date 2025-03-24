@@ -1,5 +1,7 @@
 <?php
 
+include('layouts/header.php');
+
 include('server/connection.php');
 
 
@@ -21,8 +23,6 @@ if (isset($_GET['product_id'])) {
 }
 
 ?>
-
-<?php include('layouts/header.php'); ?>
 
   <!--Single Product-->
   <section class="container single-product my-5 pt-5">
@@ -49,7 +49,7 @@ if (isset($_GET['product_id'])) {
       </div>
 
       <div class="col-lg-6 col-md-12 col-12">
-        <h6>Laptop Computers</h6>
+        <h6><?php echo $row['product_category']; ?></h6>
         <h3 class="py-4"><?php echo $row['product_name']; ?></h3>
         <h2>LKR <?php echo $row['product_price']; ?></h2>
 
@@ -92,10 +92,10 @@ if (isset($_GET['product_id'])) {
         </div>
         <h5 class="p-name">Lenevo LOQ</h5>
         <h4 class="p-price">LKR 400000</h4>
-        <button class="buy-btn">Buy Now</button>
+        <a href="single_product.php?product_id=1"><button class="buy-btn">Buy Now</button></a>
       </div>
       <div class="product text-center col-lg-3 col-md-4 col-sm-12">
-        <img class="img-fluid mb-3" src="assets/imgs/featured2.jpg">
+        <img class="img-fluid mb-3" src="assets/imgs/featured2.png">
         <div class="star">
           <i class="fas fa-star"></i>
           <i class="fas fa-star"></i>
@@ -105,10 +105,10 @@ if (isset($_GET['product_id'])) {
         </div>
         <h5 class="p-name">HP Victus</h5>
         <h4 class="p-price">LKR 50000</h4>
-        <button class="buy-btn">Buy Now</button>
+        <a href="single_product.php?product_id=2"><button class="buy-btn">Buy Now</button></a>
       </div>
       <div class="product text-center col-lg-3 col-md-4 col-sm-12">
-        <img class="img-fluid mb-3" src="assets/imgs/featured3.jpg">
+        <img class="img-fluid mb-3" src="assets/imgs/featured3.png">
         <div class="star">
           <i class="fas fa-star"></i>
           <i class="fas fa-star"></i>
@@ -118,10 +118,10 @@ if (isset($_GET['product_id'])) {
         </div>
         <h5 class="p-name">Dell Inspiron 16</h5>
         <h4 class="p-price">LKR 60000</h4>
-        <button class="buy-btn">Buy Now</button>
+        <a href="single_product.php?product_id=3"><button class="buy-btn">Buy Now</button></a>
       </div>
       <div class="product text-center col-lg-3 col-md-4 col-sm-12">
-        <img class="img-fluid mb-3" src="assets/imgs/featured4.jpg">
+        <img class="img-fluid mb-3" src="assets/imgs/featured4.png">
         <div class="star">
           <i class="fas fa-star"></i>
           <i class="fas fa-star"></i>
@@ -131,7 +131,7 @@ if (isset($_GET['product_id'])) {
         </div>
         <h5 class="p-name">Gigabyte G5</h5>
         <h4 class="p-price">LKR 300000</h4>
-        <button class="buy-btn">Buy Now</button>
+        <a href="single_product.php?product_id=4"><button class="buy-btn">Buy Now</button></a>
       </div>
     </div>
   </section>
