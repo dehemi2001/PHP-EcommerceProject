@@ -63,7 +63,7 @@
 
     <?php while ($row = $featured_products->fetch_assoc()) { ?>
 
-      <div class="product text-center col-lg-3 col-md-4 col-sm-12">
+      <div onclick="window.location.href='<?php echo "single_product.php?product_id=" . $row['product_id']; ?>';" class="product text-center col-lg-3 col-md-4 col-sm-12">
         <div class="product-image mb-3" style="background-image: url('assets/imgs/<?php echo $row['product_image']; ?>');"></div>
         <div class="star">
           <i class="fas fa-star"></i>
@@ -74,7 +74,7 @@
         </div>
         <h5 class="p-name"><?php echo $row['product_name']; ?></h5>
         <h4 class="p-price">LKR <?php echo $row['product_price']; ?></h4>
-        <a href="<?php echo "single_product.php?product_id=" . $row['product_id']; ?>"><button class="buy-btn">Buy Now</button></a>
+        <button class="buy-btn">Buy Now</button>
       </div>
     <?php } ?>
   </div>
@@ -85,7 +85,7 @@
   <div class="container">
     <h4 style="color:white">MID SEASON'S SALE</h4>
     <h1>Autumn Collection <br> UP to 30% OFF</h1>
-    <button class="text-uppercase">shop now</button>
+    <a href="shop.php"><button class="text-uppercase">shop now</button></a>
   </div>
 </section>
 
@@ -102,7 +102,7 @@
 
     <?php while ($row = $desktops->fetch_assoc()) { ?>
 
-      <div class="product text-center col-lg-3 col-md-4 col-sm-12">
+      <div onclick="window.location.href='<?php echo "single_product.php?product_id=" . $row['product_id']; ?>';" class="product text-center col-lg-3 col-md-4 col-sm-12">
         <div class="product-image mb-3" style="background-image: url('assets/imgs/<?php echo $row['product_image']; ?>');"></div>
         <div class="star">
           <i class="fas fa-star"></i>
@@ -113,7 +113,7 @@
         </div>
         <h5 class="p-name"><?php echo $row['product_name']; ?></h5>
         <h4 class="p-price"><?php echo $row['product_price']; ?></h4>
-        <a href="<?php echo "single_product.php?product_id=" . $row['product_id']; ?>"><button class="buy-btn">Buy Now</button></a>
+        <button class="buy-btn">Buy Now</button>
       </div>
 
     <?php } ?>
@@ -134,7 +134,7 @@
 
     <?php while ($row = $laptop_products->fetch_assoc()) { ?>
 
-      <div class="product text-center col-lg-3 col-md-4 col-sm-12">
+      <div onclick="window.location.href='<?php echo "single_product.php?product_id=" . $row['product_id']; ?>';" class="product text-center col-lg-3 col-md-4 col-sm-12">
         <div class="product-image mb-3" style="background-image: url('assets/imgs/<?php echo $row['product_image']; ?>');"></div>
         <div class="star">
           <i class="fas fa-star"></i>
@@ -145,7 +145,7 @@
         </div>
         <h5 class="p-name"><?php echo $row['product_name']; ?></h5>
         <h4 class="p-price"><?php echo $row['product_price']; ?></h4>
-        <a href="<?php echo "single_product.php?product_id=" . $row['product_id']; ?>"><button class="buy-btn">Buy Now</button></a>
+        <button class="buy-btn">Buy Now</button>
       </div>
     <?php } ?>
   </div>
@@ -164,7 +164,7 @@
 
     <?php while ($row = $accessories->fetch_assoc()) { ?>
 
-      <div class="product text-center col-lg-3 col-md-4 col-sm-12">
+      <div onclick="window.location.href='<?php echo "single_product.php?product_id=" . $row['product_id']; ?>';" class="product text-center col-lg-3 col-md-4 col-sm-12">
         <div class="product-image mb-3" style="background-image: url('assets/imgs/<?php echo $row['product_image']; ?>');"></div>
         <div class="star">
           <i class="fas fa-star"></i>
@@ -175,7 +175,7 @@
         </div>
         <h5 class="p-name"><?php echo $row['product_name']; ?></h5>
         <h4 class="p-price"><?php echo $row['product_price']; ?></h4>
-        <a href="<?php echo "single_product.php?product_id=" . $row['product_id']; ?>"><button class="buy-btn">Buy Now</button></a>
+        <button class="buy-btn">Buy Now</button>
       </div>
 
     <?php } ?>

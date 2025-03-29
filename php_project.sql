@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 24, 2025 at 05:56 PM
+-- Generation Time: Mar 28, 2025 at 05:56 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -63,14 +63,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`order_id`, `order_cost`, `order_status`, `user_id`, `user_phone`, `user_city`, `user_address`, `order_date`) VALUES
-(1, 900000.00, 'Shipped', 1, 774075447, 'Negombo', 'Negombo', '2025-03-12 11:16:50'),
-(2, 400000.00, 'not paid', 1, 774075447, 'Negombo', 'Negombo', '2025-03-12 17:53:34'),
-(3, 400000.00, 'not paid', 1, 774075447, 'Negombo', 'Negombo', '2025-03-13 10:18:45'),
-(4, 300000.00, 'delivered', 1, 774075447, 'Negombo', 'Negombo', '2025-03-16 13:59:27'),
-(5, 400000.00, 'not paid', 1, 774075447, 'Negombo', 'Negombo', '2025-03-18 11:14:24'),
-(6, 1500000.00, 'not paid', 1, 774075447, 'Negombo', 'Negombo', '2025-03-18 11:57:35'),
-(7, 1000000.00, 'not paid', 1, 774075447, 'Negombo', 'Negombo', '2025-03-18 13:30:02'),
-(8, 400000.00, 'not paid', 1, 774075447, 'Negombo', 'Negombo', '2025-03-18 13:31:39');
+(1, 1302000.00, 'Not Paid', 1, 774075447, 'Negombo', 'Negombo', '2025-03-28 08:28:01');
 
 -- --------------------------------------------------------
 
@@ -95,18 +88,10 @@ CREATE TABLE `order_items` (
 --
 
 INSERT INTO `order_items` (`item_id`, `order_id`, `product_id`, `product_name`, `product_image`, `product_price`, `product_quantity`, `user_id`, `order_date`) VALUES
-(1, 1, '1', 'Lenevo LOQ', 'featured1.png', 400000.00, 1, 1, '2025-03-12 11:16:50'),
-(2, 1, '2', 'HP Victus', 'featured2.jpg', 500000.00, 1, 1, '2025-03-12 11:16:50'),
-(3, 2, '1', 'Lenevo LOQ', 'featured1.png', 400000.00, 1, 1, '2025-03-12 17:53:34'),
-(4, 3, '1', 'Lenevo LOQ', 'featured1.png', 400000.00, 1, 1, '2025-03-13 10:18:45'),
-(5, 4, '4', 'Gigabyte G5', 'featured4.jpg', 300000.00, 1, 1, '2025-03-16 13:59:27'),
-(6, 5, '1', 'Lenevo LOQ', 'featured1.png', 400000.00, 1, 1, '2025-03-18 11:14:24'),
-(7, 6, '1', 'Lenevo LOQ', 'featured1.png', 400000.00, 1, 1, '2025-03-18 11:57:35'),
-(8, 6, '2', 'HP Victus', 'featured2.jpg', 500000.00, 1, 1, '2025-03-18 11:57:35'),
-(9, 6, '3', 'Dell Inspiron 16', 'featured3.jpg', 600000.00, 1, 1, '2025-03-18 11:57:35'),
-(10, 7, '1', 'Lenevo LOQ', 'featured1.png', 400000.00, 1, 1, '2025-03-18 13:30:02'),
-(11, 7, '3', 'Dell Inspiron 16', 'featured3.jpg', 600000.00, 1, 1, '2025-03-18 13:30:02'),
-(12, 8, '5', 'Asus ExpertCenter', 'desktop1.jpg', 400000.00, 1, 1, '2025-03-18 13:31:39');
+(1, 1, '1', 'Lenevo LOQ', 'featured1.png', 400000.00, 1, 1, '2025-03-28 08:28:01'),
+(2, 1, '2', 'HP Victus', 'featured2.png', 500000.00, 1, 1, '2025-03-28 08:28:01'),
+(3, 1, '5', 'Asus ExpertCenter', 'desktop1.png', 400000.00, 1, 1, '2025-03-28 08:28:01'),
+(4, 1, '9', 'Keyboard', 'accessorie1.png', 2000.00, 1, 1, '2025-03-28 08:28:01');
 
 -- --------------------------------------------------------
 
@@ -234,13 +219,13 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `payments`

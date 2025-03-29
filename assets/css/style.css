@@ -1,5 +1,14 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap'); */
 
+/* Hover effect for the "Buy Now" button in featured, desktops, laptops, and accessories sections */
+#featured .product .buy-btn:hover,
+#desktops .product .buy-btn:hover,
+#laptops .product .buy-btn:hover,
+#accessories .product .buy-btn:hover {
+    background-color: #ff5722;
+    /* Brighter orange on hover */
+}
+
 .nav-buttons {
     margin-left: 50%;
 }
@@ -189,7 +198,8 @@ button:hover {
 
 .product-image {
     width: 100%;
-    padding-top: 75%; /* Adjust this value to control the aspect ratio */
+    padding-top: 75%;
+    /* Adjust this value to control the aspect ratio */
     background-size: cover;
     background-position: center;
 }
@@ -483,6 +493,20 @@ th:last-child {
 #login-form input {
     width: 50%;
     margin: 5px auto;
+}
+
+/* mobile */
+@media only screen and (max-width: 600px) {
+    #login-form {
+        width: 100%;
+        margin: 10px auto;
+        padding: 15px;
+    }
+
+    #login-form input {
+        width: 100%;
+        margin: 10px 0;
+    }
 }
 
 #login-form #login-btn {

@@ -146,7 +146,7 @@ if (isset($_POST['search'])) {
 
             <?php while ($row = $products->fetch_assoc()) { ?>
 
-                <div class="product text-center col-lg-3 col-md-4 col-sm-12">
+                <div onclick="window.location.href='<?php echo "single_product.php?product_id=" . $row['product_id']; ?>';" class="product text-center col-lg-3 col-md-4 col-sm-12">
                     <div class="product-image mb-3" style="background-image: url('assets/imgs/<?php echo $row['product_image']; ?>');"></div>
                     <div class="star">
                         <i class="fas fa-star"></i>
@@ -157,7 +157,7 @@ if (isset($_POST['search'])) {
                     </div>
                     <h5 class="p-name"><?php echo $row['product_name']; ?></h5>
                     <h4 class="p-price">LKR <?php echo $row['product_price']; ?></h4>
-                    <a class="btn shop-buy-btn" href="<?php echo "single_product.php?product_id=" . $row['product_id']; ?>">Buy Now</a>
+                    <a class="btn shop-buy-btn">Buy Now</a>
                 </div>
 
             <?php } ?>

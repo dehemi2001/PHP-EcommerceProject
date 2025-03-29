@@ -65,7 +65,6 @@ $orders = $stmt2->get_result();
                 <th>User Phone</th>
                 <th>User Address</th>
                 <th>Edit</th>
-                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -79,7 +78,6 @@ $orders = $stmt2->get_result();
                 <td><?php echo $order['user_phone'] ?></td>
                 <td><?php echo $order['user_address'] ?></td>
                 <td><a class="btn btn-primary" href="edit_order.php?order_id=<?php echo $order['order_id'] ?>">Edit</a></td>
-                <td><a class="btn btn-danger">Delete</a></td>
             </tr>
         <?php } ?>
         </tbody>

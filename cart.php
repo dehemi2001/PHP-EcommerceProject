@@ -120,8 +120,8 @@ function calculateTotalCart()
         </tr>
 
         <?php
-        //Check if the cart exists and is an array before attempting to iterate.
-        if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
+        // Check if the cart exists and is an array before attempting to iterate.
+        if (isset($_SESSION['cart']) && is_array($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
             foreach ($_SESSION['cart'] as $key => $value) {
                 ?>
                 <tr>
@@ -139,13 +139,11 @@ function calculateTotalCart()
                         </div>
                     </td>
                     <td>
-
                         <form method="POST" action="cart.php">
                             <input type="hidden" name="product_id" value="<?php echo $value['product_id']; ?>">
                             <input type="number" name="product_quantity" value="<?php echo $value['product_quantity']; ?>">
                             <input type="submit" class="edit-btn" value="edit" name="edit_quantity">
                         </form>
-
                     </td>
                     <td>
                         <span>LKR</span>
@@ -154,19 +152,18 @@ function calculateTotalCart()
                 </tr>
                 <?php
             }
+        } else {
+            // Display a message when the cart is empty
+            echo '<tr><td colspan="3" class="text-center">The cart is empty</td></tr>';
         }
         ?>
     </table>
 
     <div class="cart-total">
         <table>
-            <!-- <tr>
-                    <td>Subtotal</td>
-                    <td>LKR 1200000</td>
-                </tr>
-                <tr> -->
-            <td>Total</td>
-            <td>LKR <?php echo isset($_SESSION['total']) ? $_SESSION['total'] : 0; ?></td>
+            <tr>
+                <td>Total</td>
+                <td>LKR <?php echo isset($_SESSION['total']) ? $_SESSION['total'] : 0; ?></td>
             </tr>
         </table>
     </div>
