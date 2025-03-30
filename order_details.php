@@ -89,7 +89,7 @@ function calculateTotalOrderPrice($order_details){
 
     </table>
 
-    <?php if ($order_status == "not paid") { ?>
+    <?php if ($order_status == "Not Paid") { ?>
 
         <form style="float: right;" method="POST" action="payment.php">
             <input type="hidden" name="order_total_price" value="<?php echo $order_total_price; ?>">
