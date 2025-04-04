@@ -12,6 +12,10 @@ if(isset($_POST['order_pay_btn'])){
 <!--Payment-->
 <section class="my-5 py-5">
     <div class="container text-center mt-3 pt-5">
+    <?php if(isset($_POST['order_status'])){ ?>
+    <p class="text_center" style="color: green">Order has been placed successfully!</p>
+    <a href="account.php#orders">View Orders</a><br><br>
+    <?php } ?>
         <h2 class="form-weight-bold">Payment</h2>
         <hr class="mx-auto">
     </div>
@@ -21,7 +25,7 @@ if(isset($_POST['order_pay_btn'])){
         <p>Total payment: LKR <?php echo $_SESSION['total']; ?></p>
         <input class="btn btn-primary" value="Pay Now" type="submit">
 
-        <?php }else if(isset($_POST['order_status']) && $_POST['order_status'] == "not paid"){ ?>
+        <?php }else if(isset($_POST['order_status']) && $_POST['order_status'] == "Not Paid"){ ?>
             <p>Total payment: LKR <?php echo $_POST['order_total_price']; ?></p>
             <input class="btn btn-primary" value="Pay Now" type="submit">
 

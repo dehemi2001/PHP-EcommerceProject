@@ -29,4 +29,5 @@ include('../server/connection.php');
         <a href="add_product.php">Add Product</a>
         <a href="account.php">Account</a>
         <a href="help.php">Help</a>
+        <a href="../account.php">Website</a>
     </div>

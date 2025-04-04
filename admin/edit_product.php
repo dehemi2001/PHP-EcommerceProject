@@ -19,9 +19,10 @@ if (isset($_GET['product_id'])) {
     $offer = $_POST['product_offer'];
     $color = $_POST['color'];
     $category = $_POST['category'];
+    $stock_quantity = $_POST['stock_quantity'];
 
-    $stmt = $conn->prepare("UPDATE products SET product_name=?, product_description=?, product_price=?, product_special_offer=?, product_color=?, product_category=? WHERE product_id=?");
-    $stmt->bind_param('ssssssi', $title, $description, $price, $offer, $color, $category, $product_id);
+    $stmt = $conn->prepare("UPDATE products SET product_name=?, product_description=?, product_price=?, product_special_offer=?, product_color=?, product_category=?, stock_quantity=? WHERE product_id=?");
+    $stmt->bind_param('ssssssii', $title, $description, $price, $offer, $color, $category, $stock_quantity, $product_id);
 
     if($stmt->execute()){
         header('Location: products.php?edit_success_message=Product has been updated successfully');
@@ -51,12 +52,12 @@ else {
 
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
-                    <input type="text" class="form-control" id="description" value="<?php echo $product['product_description']; ?>" name="description" placeholder="Description">
+                    <textarea class="form-control" id="description" name="description" placeholder="Description" rows="5"><?php echo $product['product_description']; ?></textarea>
                 </div>
 
                 <div class="mb-3">
                     <label for="price" class="form-label">Price</label>
-                    <input type="text" class="form-control" id="price" value="<?php echo $product['product_price']; ?>" name="price" placeholder="Price">
+                    <input type="number" class="form-control" id="price" value="<?php echo $product['product_price']; ?>" name="price" placeholder="Price" step="0.01" min="0">
                 </div>
 
                 <div class="mb-3">
@@ -75,7 +76,12 @@ else {
 
                 <div class="mb-3">
                     <label for="sale" class="form-label">Special Offer/Sale</label>
-                    <input type="text" class="form-control" id="product_offer" value="<?php echo $product['product_special_offer']; ?>" name="product_offer" placeholder="Sale %">
+                    <input type="number" class="form-control" id="product_offer" value="<?php echo $product['product_special_offer']; ?>" name="product_offer" placeholder="Sale %" step="0.01" min="0" max="100">
+                </div>
+
+                <div class="mb-3">
+                    <label for="sale" class="form-label">Stock Quantity</label>
+                    <input type="number" min=0 class="form-control" id="stock_quantity" value="<?php echo $product['stock_quantity']; ?>" name="stock_quantity" placeholder="Stock Quantity">
                 </div>
 
                 <button type="submit" class="btn btn-primary" name="edit_btn">Edit</button>

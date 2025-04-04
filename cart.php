@@ -1,103 +1,102 @@
 <?php include('layouts/header.php'); ?>
 
 <?php
+include('server/connection.php'); // Ensure the database connection is included
 
 if (isset($_POST["add_to_cart"])) {
-    //if user has already added a product to cart
-    if (isset($_SESSION["cart"])) {
-        $products_array_ids = array_column($_SESSION['cart'], "product_id"); // [ 2, 3, 4, 10, 15]
-        //if product has already been added to cart or noe
-        if (!in_array($_POST["product_id"], $products_array_ids)) {
-            $product_id = $_POST['product_id'];
+    // Fetch stock_quantity from the database
+    $product_id = $_POST['product_id'];
+    $stmt = $conn->prepare("SELECT stock_quantity FROM products WHERE product_id = ?");
+    $stmt->bind_param("i", $product_id);
+    $stmt->execute();
+    $stmt->bind_result($stock_quantity);
+    $stmt->fetch();
+    $stmt->close();
 
+    if ($stock_quantity > 0) {
+        // If user has already added a product to the cart
+        if (isset($_SESSION["cart"])) {
+            $products_array_ids = array_column($_SESSION['cart'], "product_id"); // [ 2, 3, 4, 10, 15]
+            // If product has not been added to the cart yet
+            if (!in_array($product_id, $products_array_ids)) {
+                $product_array = array(
+                    'product_id' => $product_id,
+                    'product_name' => $_POST['product_name'],
+                    'product_price' => $_POST['product_price'],
+                    'product_image' => $_POST['product_image'],
+                    'product_quantity' => $_POST['product_quantity'],
+                    'stock_quantity' => $stock_quantity
+                );
+
+                $_SESSION['cart'][] = $product_array;
+            } else {
+                echo '<script>alert("Product was already added to cart")</script>';
+            }
+        } else {
+            // If this is the first product being added to the cart
             $product_array = array(
-                'product_id' => $_POST['product_id'],
+                'product_id' => $product_id,
                 'product_name' => $_POST['product_name'],
                 'product_price' => $_POST['product_price'],
                 'product_image' => $_POST['product_image'],
-                'product_quantity' => $_POST['product_quantity']
+                'product_quantity' => $_POST['product_quantity'],
+                'stock_quantity' => $stock_quantity
             );
 
             $_SESSION['cart'][] = $product_array;
-
-            //product has already been added
-        } else {
-            echo '<script>alert("Product was already added to cart")</script>';
         }
-
-        //if this is the first product    
     } else {
-        $product_id = $_POST['product_id'];
-        $product_name = $_POST['product_name'];
-        $product_price = $_POST['product_price'];
-        $product_image = $_POST['product_image'];
-        $product_quantity = $_POST['product_quantity'];
-
-        $product_array = array(
-            'product_id' => $product_id,
-            'product_name' => $product_name,
-            'product_price' => $product_price,
-            'product_image' => $product_image,
-            'product_quantity' => $product_quantity
-        );
-
-        $_SESSION['cart'][] = $product_array;
-        // [ 2=>[], 3=>[], 5=>[] ]
+        echo '<script>alert("Product is out of stock")</script>';
     }
+}
 
-    //remove product from cart
-} elseif (isset($_POST["remove_product"])) {
+// Remove product from cart
+elseif (isset($_POST["remove_product"])) {
     $product_id_to_remove = $_POST['product_id'];
 
-    // Check if the cart exists and is an array before attempting to iterate.
     if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
-        // Loop through the cart to find the product
         foreach ($_SESSION['cart'] as $key => $product) {
             if ($product['product_id'] == $product_id_to_remove) {
-                // Remove the product from the cart
                 unset($_SESSION['cart'][$key]);
                 echo '<script>alert("Product successfully removed from cart")</script>';
-                break; // Exit the loop after removing the product
+                break;
             }
         }
     }
-} elseif (isset($_POST["edit_quantity"])) {
-    //we get id and quantity from the form
+}
+
+// Edit product quantity
+elseif (isset($_POST["edit_quantity"])) {
     $product_id = $_POST['product_id'];
     $product_quantity = $_POST['product_quantity'];
-    // Check if the cart exists and is an array before attempting to iterate.
+
     if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
         foreach ($_SESSION['cart'] as $key => $product) {
             if ($product['product_id'] == $product_id) {
-                // Update the quantity of the product
                 $_SESSION['cart'][$key]['product_quantity'] = $product_quantity;
-                break; // Exit the loop after updating the quantity
+                break;
             }
         }
     }
     header('location: cart.php');
 }
 
-//calculate total
+// Calculate total
 calculateTotalCart();
 
 function calculateTotalCart()
 {
     $total_price = 0;
     $total_quantity = 0;
-    
-    // Check if the cart exists and is an array before attempting to iterate.
+
     if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
         foreach ($_SESSION['cart'] as $key => $value) {
-
             $product = $_SESSION['cart'][$key];
-
             $price = $product['product_price'];
             $quantity = $product['product_quantity'];
 
-            $total_price = $total_price + $price * $quantity;
-            $total_quantity = $total_quantity + $quantity;
-            
+            $total_price += $price * $quantity;
+            $total_quantity += $quantity;
         }
     }
     $_SESSION['total'] = $total_price;
@@ -112,6 +111,10 @@ function calculateTotalCart()
         <hr>
     </div>
 
+    <?php if(isset($_GET['error'])) { ?>
+        <p class="text_center" style="color: red"><?php echo $_GET['error']; ?></p>
+    <?php } ?>
+
     <table class="mt-5 pt-5">
         <tr>
             <th>Product</th>
@@ -123,6 +126,16 @@ function calculateTotalCart()
         // Check if the cart exists and is an array before attempting to iterate.
         if (isset($_SESSION['cart']) && is_array($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
             foreach ($_SESSION['cart'] as $key => $value) {
+                // Fetch the latest stock_quantity from the database
+                $stmt = $conn->prepare("SELECT stock_quantity FROM products WHERE product_id = ?");
+                $stmt->bind_param("i", $value['product_id']);
+                $stmt->execute();
+                $stmt->bind_result($latest_stock_quantity);
+                $stmt->fetch();
+                $stmt->close();
+
+                // Update the stock_quantity in the session
+                $_SESSION['cart'][$key]['stock_quantity'] = $latest_stock_quantity;
                 ?>
                 <tr>
                     <td>
@@ -131,6 +144,7 @@ function calculateTotalCart()
                             <div>
                                 <p><?php echo $value['product_name']; ?></p>
                                 <small><span>LKR </span><?php echo $value['product_price']; ?></small>
+                                <small>Stock Quantity: <?php echo $latest_stock_quantity; ?></small>
                                 <form method="POST" action="cart.php">
                                     <input type="hidden" name="product_id" value="<?php echo $value['product_id']; ?>">
                                     <input type="submit" name="remove_product" class="remove-btn" value="remove">
@@ -141,7 +155,7 @@ function calculateTotalCart()
                     <td>
                         <form method="POST" action="cart.php">
                             <input type="hidden" name="product_id" value="<?php echo $value['product_id']; ?>">
-                            <input type="number" name="product_quantity" value="<?php echo $value['product_quantity']; ?>">
+                            <input type="number" name="product_quantity" value="<?php echo $value['product_quantity']; ?>" min="1" max="<?php echo $latest_stock_quantity; ?>">
                             <input type="submit" class="edit-btn" value="edit" name="edit_quantity">
                         </form>
                     </td>

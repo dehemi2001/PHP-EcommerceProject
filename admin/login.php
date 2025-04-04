@@ -74,6 +74,7 @@ if(isset($_POST['login_btn'])){
                     </div>
                     <div id="errorMessage" class="error-message"></div>
                 </form>
+                <a href="../account.php" class="text-center d-block mt-3">Back to Website</a>
             </div>
         </div>
     </div>

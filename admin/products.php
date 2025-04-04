@@ -44,8 +44,7 @@ $products = $stmt2->get_result();
 
 <!-- Main Content -->
 <div class="main-content">
-    <h2 class="mb-3">Dashboard</h2>
-    <h4>Products</h4>
+    <h4 class="mt-5">Products</h4>
 
     <?php if(isset($_GET['edit_success_message'])) { ?>
         <p class="text_center" style="color: green"><?php echo $_GET['edit_success_message']; ?></p>
@@ -89,6 +88,7 @@ $products = $stmt2->get_result();
                 <th>Product Offer</th>
                 <th>Product Category</th>
                 <th>Product Color</th>
+                <th>Stock Quantity</th>
                 <th>Edit Images</th>
                 <th>Edit</th>
                 <th>Delete</th>
@@ -105,6 +105,7 @@ $products = $stmt2->get_result();
                 <td><?php echo $product['product_special_offer'] ?>%</td>
                 <td><?php echo $product['product_category'] ?></td>
                 <td><?php echo $product['product_color'] ?></td>
+                <td><?php echo $product['stock_quantity'] ?></td>
                 <td><a class="btn btn-warning" href="<?php echo "edit_images.php?product_id=".$product['product_id']."&product_name=".$product['product_name']; ?>">Edit Images</a></td>
                 <td><a class="btn btn-primary" href="edit_product.php?product_id=<?php echo $product['product_id']; ?>">Edit</a></td>
                 <td><a class="btn btn-danger" href="delete_product.php?product_id=<?php echo $product['product_id']; ?>">Delete</a></td>

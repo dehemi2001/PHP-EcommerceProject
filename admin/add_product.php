@@ -16,11 +16,11 @@ include('header.php');
             </div>
             <div class="mb-3">
                 <label class="form-label">Price</label>
-                <input type="text" name="price" class="form-control" required>
+                <input type="number" name="price" class="form-control" required step="0.01" min="0">
             </div>
             <div class="mb-3">
                 <label class="form-label">Special Offer/Sale</label>
-                <input type="text" name="offer" class="form-control">
+                <input type="number" name="offer" class="form-control" required step="0.01" min="0" max="100">
             </div>
             <div class="mb-3">
                 <label class="form-label">Category</label>
@@ -33,6 +33,10 @@ include('header.php');
             <div class="mb-3">
                 <label class="form-label">Color</label>
                 <input type="text" name="color" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Stock Quantity</label>
+                <input type="number" min=0 name="stock_quantity" class="form-control">
             </div>
             <div class="mb-3">
                 <label class="form-label">Image 1</label>

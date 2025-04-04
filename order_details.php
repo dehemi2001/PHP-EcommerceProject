@@ -16,7 +16,17 @@ if (isset($_POST['order_details_btn']) && isset($_POST['order_id'])) {
 
     $order_status = $_POST['order_status'];
 
-    $stmt = $conn->prepare("SELECT * FROM order_items WHERE order_id = ?");
+    $stmt = $conn->prepare("SELECT 
+    p.product_image, 
+    p.product_name, 
+    p.product_price, 
+    oi.product_quantity
+    FROM 
+    order_items oi
+    JOIN 
+    products p ON oi.product_id = p.product_id
+    WHERE 
+    oi.order_id = ?;");
 
     $stmt->bind_param("i", $order_id);
 

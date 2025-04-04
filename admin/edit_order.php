@@ -55,6 +55,7 @@ if (isset($_GET['order_id'])) {
                         <option <?php if($order['order_status'] == 'Paid'){echo"selected";} ?>>Paid</option>
                         <option <?php if($order['order_status'] == 'Shipped'){echo"selected";} ?>>Shipped</option>
                         <option <?php if($order['order_status'] == 'Delivered'){echo"selected";} ?>>Delivered</option>
+                        <option <?php if($order['order_status'] == 'Cancelled'){echo"selected";} ?>>Cancelled</option>
                     </select>
                 </div>
 

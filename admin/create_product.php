@@ -10,6 +10,7 @@ if(isset($_POST['create_product'])){
     $product_special_offer = $_POST['offer'];
     $product_category = $_POST['category'];
     $product_color = $_POST['color'];
+    $stock_quantity = $_POST['stock_quantity'];
 
     //this is the file itself (image)
     $image1 = $_FILES['image1']['tmp_name'];
@@ -30,9 +31,9 @@ if(isset($_POST['create_product'])){
     move_uploaded_file($image4, '../assets/imgs/'.$image_name4);
 
     //create a new user
-    $stmt = $conn->prepare("INSERT INTO products (product_name, product_description, product_price, product_special_offer, product_image, product_image2, product_image3, product_image4, product_category, product_color) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO products (product_name, product_description, product_price, product_special_offer, product_image, product_image2, product_image3, product_image4, product_category, product_color, stock_quantity) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-    $stmt->bind_param("ssssssssss", $product_name, $product_description, $product_price, $product_special_offer, $image_name1, $image_name2, $image_name3, $image_name4, $product_category, $product_color);
+    $stmt->bind_param("ssssssssssi", $product_name, $product_description, $product_price, $product_special_offer, $image_name1, $image_name2, $image_name3, $image_name4, $product_category, $product_color, $stock_quantity);
 
     if($stmt->execute()){
         header('location: products.php?product_created=Product has been created successfully!');
