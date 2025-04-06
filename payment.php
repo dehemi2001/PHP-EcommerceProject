@@ -12,7 +12,7 @@ if(isset($_POST['order_pay_btn'])){
 <!--Payment-->
 <section class="my-5 py-5">
     <div class="container text-center mt-3 pt-5">
-    <?php if(isset($_POST['order_status'])){ ?>
+    <?php if(isset($_SESSION['total']) && $_SESSION['total'] !=0 ){ ?>
     <p class="text_center" style="color: green">Order has been placed successfully!</p>
     <a href="account.php#orders">View Orders</a><br><br>
     <?php } ?>
