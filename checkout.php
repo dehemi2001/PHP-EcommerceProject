@@ -45,11 +45,11 @@ if(!empty($_SESSION['cart'])){
                 </div>
                 <div class="form-group checkout-small-element">
                     <label>City</label>
-                    <input type="text" class="form-control" id="checkout-address" name="address" placeholder="Address" required>
+                    <input type="text" class="form-control" id="checkout-city" name="city" placeholder="City" required>
                 </div>
                 <div class="form-group checkout-large-element">
                     <label>Address</label>
-                    <input type="text" class="form-control" id="checkout-city" name="city" placeholder="City" required>
+                    <input type="text" class="form-control" id="checkout-address" name="address" placeholder="Address" required>
                 </div>
                 <div class="form-group checkout-btn-container">
                     <p>Total amount: LKR <?php echo $_SESSION['total']; ?></p>

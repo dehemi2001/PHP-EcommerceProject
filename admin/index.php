@@ -50,7 +50,7 @@ FROM
     orders o
 JOIN 
     users u ON o.user_id = u.user_id
-    ORDER BY o.order_date DESC
+    ORDER BY o.order_id DESC
     LIMIT $offset, $total_records_per_page");
 $stmt2->execute();
 $orders = $stmt2->get_result();
