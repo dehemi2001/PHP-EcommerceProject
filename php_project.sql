@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 04, 2025 at 05:05 PM
+-- Generation Time: Apr 11, 2025 at 10:48 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -63,7 +63,8 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`order_id`, `order_cost`, `order_status`, `user_id`, `user_phone`, `user_city`, `user_address`, `order_date`) VALUES
-(1, 802000.00, 'Not Paid', 1, 774075447, 'Negombo', '314/1A, G. D. S. Gamhewa Mawatha, Thimbirigaskatuwa', '2025-04-03 21:34:18');
+(1, 802000.00, 'Not Paid', 1, 774075447, '314/1A, G. D. S. Gamhewa Mawatha, Thimbirigaskatuwa', 'Negombo', '2025-04-11 10:36:54'),
+(2, 1500000.00, 'Not Paid', 1, 774075447, '314/1A, G. D. S. Gamhewa Mawatha, Thimbirigaskatuwa', 'Negombo', '2025-04-11 10:38:48');
 
 -- --------------------------------------------------------
 
@@ -83,9 +84,11 @@ CREATE TABLE `order_items` (
 --
 
 INSERT INTO `order_items` (`item_id`, `order_id`, `product_id`, `product_quantity`) VALUES
-(1, 1, 1, 1),
-(2, 1, 5, 1),
-(3, 1, 9, 1);
+(1, 1, 12, 1),
+(2, 1, 8, 1),
+(3, 1, 4, 1),
+(4, 2, 6, 2),
+(5, 2, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -126,18 +129,18 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `product_name`, `product_category`, `product_description`, `product_image`, `product_image2`, `product_image3`, `product_image4`, `product_price`, `product_special_offer`, `product_color`, `stock_quantity`) VALUES
-(1, 'Lenevo LOQ', 'Laptop Computers', 'Focus: Entry-level gaming laptop.\r\nKey Specs:\r\nIntel/AMD CPUs (e.g., Intel Core i5/i7, AMD Ryzen 5/7).\r\nNVIDIA GeForce RTX graphics (e.g., RTX 3050, 4050).\r\n15.6\" or 16\" FHD/QHD displays with high refresh rates.\r\nSSD storage, ample RAM.\r\nGaming-centric thermal design.', 'featured1.png', 'featured1-2.png', 'featured1-3.png', 'featured1-4.png', 400000.00, 2.5, 'Black', 10),
-(2, 'HP Victus', 'Laptop Computers', 'Focus: Mainstream gaming and multimedia laptop.\r\nKey Specs:\r\nIntel/AMD CPUs (e.g., Intel Core i5/i7, AMD Ryzen 5/7).\r\nNVIDIA GeForce RTX graphics (e.g., RTX 3050, 4060).\r\n15.6\" or 16\" FHD displays, high refresh rates.\r\nSSD storage, expandable RAM.\r\nEnhanced audio, modern design.', 'featured2.png', 'featured2-2.png', 'featured2-3.png', 'featured2-4.png', 500000.00, 2.5, 'Black', 10),
-(3, 'Dell Inspiron 16', 'Laptop Computers', 'Focus: Versatile laptop for everyday tasks and productivity.\r\nKey Specs:\r\nIntel/AMD CPUs (e.g., Intel Core i5/i7, AMD Ryzen 5/7).\r\nIntegrated or discrete graphics (e.g., Intel Iris Xe, NVIDIA GeForce MX series).\r\n16\" FHD+ displays, optional touch.\r\nSSD storage, ample RAM.\r\nSleek design, long battery life.', 'featured3.png', 'featured3-2.png', 'featured3-3.png', 'featured3-4.png', 600000.00, 2.5, 'Black', 10),
-(4, 'Asus TUF', 'Laptop Computers', 'Focus: Durable and affordable gaming laptops and desktops.\r\nKey Specs (Laptops):\r\nIntel/AMD CPUs (e.g., Intel Core i5/i7, AMD Ryzen 5/7/9).\r\nNVIDIA GeForce RTX graphics (e.g., RTX 3050, 4060, 4070).\r\n15.6\" or 17.3\" FHD/QHD displays, high refresh rates.\r\nSSD storage, expandable RAM.\r\nMIL-STD-810H military-grade durability.\r\nAdvanced cooling systems.', 'featured4.png', 'featured4-2.png', 'featured4-3.png', 'featured4-4.png', 400000.00, 5, 'Black', 10),
-(5, 'Asus ExpertCenter', 'Desktop Computers', 'Focus: Reliable and secure business desktop.\r\nKey Specs:\r\nIntel Core i3/i5/i7 CPUs.\r\nIntegrated or discrete graphics.\r\nVarious storage options (HDD, SSD).\r\nMultiple connectivity ports.\r\nSecurity features, robust build.', 'desktop1.png', 'desktop1-2.png', 'desktop1-3.png', 'desktop1-4.png', 400000.00, 10, 'Black', 10),
-(6, 'Lenevo Think Center', 'Desktop Computers', 'Focus: Secure and manageable business desktop.\r\nKey Specs:\r\nIntel Core i3/i5/i7/i9 CPUs.\r\nIntegrated or discrete graphics.\r\nVarious storage options (HDD, SSD).\r\nThinkShield security features.\r\nCompact or tower form factors.', 'desktop2.png', 'desktop2-2.png', 'desktop2-3.png', 'desktop2-4.png', 500000.00, 2, 'Black', 10),
-(7, 'Dell PowerEdge T140', 'Desktop Computers', 'Focus: Small business server for basic workloads.\r\nKey Specs:\r\nIntel Xeon E-2200 series processors.\r\nUp to 64GB DDR4 ECC RAM.\r\nMultiple storage bays (HDD, SSD).\r\nRAID support.\r\nBasic remote management.', 'desktop3.png', 'desktop3-2.png', 'desktop3-3.png', 'desktop3-4.png', 600000.00, 0, 'Black', 10),
-(8, 'Lenevo IdeaCentre AIO 3', 'Desktop Computers', 'Focus: Space-saving all-in-one desktop for home or office.\r\nKey Specs:\r\nIntel/AMD CPUs (e.g., Intel Core i3/i5, AMD Ryzen 3/5).\r\nIntegrated graphics.\r\n24\" or 27\" FHD displays.\r\nSSD or HDD storage.\r\nIntegrated webcam, speakers.', 'desktop4.png', 'desktop4-2.png', 'desktop4-3.png', 'desktop4-4.png', 300000.00, 2, 'White', 10),
-(9, 'Keyboard', 'Accessories', 'Focus: High-performance gaming keyboard.\r\nKey Specs:\r\nMechanical switches (e.g., Cherry MX, Kailh, Outemu).   \r\nRGB backlighting, customizable effects.\r\nN-key rollover (NKRO) and anti-ghosting.   \r\nProgrammable macro keys.   \r\nDurable construction, aluminum frame.\r\nWired or wireless connectivity.', 'accessorie1.png', 'accessorie1-2.png', 'accessorie1-3.png', 'accessorie1-4.png', 2000.00, 0, 'Black', 10),
-(10, 'Mouse', 'Accessories', 'Focus: Precision and speed for gaming.\r\nKey Specs:\r\nHigh-DPI optical sensor (e.g., 16,000+ DPI).\r\nAdjustable DPI settings.\r\nProgrammable buttons.\r\nRGB lighting.\r\nErgonomic design.\r\nLow latency wired or wireless connection.', 'accessorie2.png', 'accessorie2-2.png', 'accessorie2-3.png', 'accessorie2-4.png', 1000.00, 0, 'Black', 10),
-(11, 'Monitor', 'Accessories', 'Focus: Immersive and smooth gaming visuals.\r\nKey Specs:\r\n27-inch QHD (2560x1440) resolution.\r\n144Hz refresh rate, 1ms response time.\r\nIPS or VA panel.\r\nAdaptive-Sync technology (e.g., FreeSync, G-Sync).\r\nHDR support.\r\nMultiple display inputs (HDMI, DisplayPort).', 'accessorie3.png', 'accessorie3-2.png', 'accessorie3-3.png', 'accessorie3-4.png', 7000.00, 0, 'Black', 10),
-(12, 'Speakers', 'Accessories', 'Focus: Enhanced audio for multimedia and gaming.\r\nKey Specs:\r\n2.1 channel configuration (two satellite speakers, one subwoofer).\r\nTotal power output (e.g., 50W RMS).\r\nFrequency response (e.g., 40Hz - 20kHz).\r\nWired or wireless connectivity (Bluetooth).\r\nVolume and bass controls.\r\n3.5mm audio input, and sometimes optical inputs.', 'accessorie4.png', 'accessorie4-2.png', 'accessorie4-3.png', 'accessorie4-4.png', 5000.00, 0, 'Black', 10);
+(1, 'Speakers', 'Accessories', 'Focus: Enhanced audio for multimedia and gaming.\r\nKey Specs:\r\n2.1 channel configuration (two satellite speakers, one subwoofer).\r\nTotal power output (e.g., 50W RMS).\r\nFrequency response (e.g., 40Hz - 20kHz).\r\nWired or wireless connectivity (Bluetooth).\r\nVolume and bass controls.\r\n3.5mm audio input, and sometimes optical inputs.', 'accessorie4.png', 'accessorie4-2.png', 'accessorie4-3.png', 'accessorie4-4.png', 5000.00, 0, 'Black', 10),
+(2, 'Monitor', 'Accessories', 'Focus: Immersive and smooth gaming visuals.\r\nKey Specs:\r\n27-inch QHD (2560x1440) resolution.\r\n144Hz refresh rate, 1ms response time.\r\nIPS or VA panel.\r\nAdaptive-Sync technology (e.g., FreeSync, G-Sync).\r\nHDR support.\r\nMultiple display inputs (HDMI, DisplayPort).', 'accessorie3.png', 'accessorie3-2.png', 'accessorie3-3.png', 'accessorie3-4.png', 7000.00, 0, 'Black', 10),
+(3, 'Mouse', 'Accessories', 'Focus: Precision and speed for gaming.\r\nKey Specs:\r\nHigh-DPI optical sensor (e.g., 16,000+ DPI).\r\nAdjustable DPI settings.\r\nProgrammable buttons.\r\nRGB lighting.\r\nErgonomic design.\r\nLow latency wired or wireless connection.', 'accessorie2.png', 'accessorie2-2.png', 'accessorie2-3.png', 'accessorie2-4.png', 1000.00, 0, 'Black', 10),
+(4, 'Keyboard', 'Accessories', 'Focus: High-performance gaming keyboard.\r\nKey Specs:\r\nMechanical switches (e.g., Cherry MX, Kailh, Outemu).   \r\nRGB backlighting, customizable effects.\r\nN-key rollover (NKRO) and anti-ghosting.   \r\nProgrammable macro keys.   \r\nDurable construction, aluminum frame.\r\nWired or wireless connectivity.', 'accessorie1.png', 'accessorie1-2.png', 'accessorie1-3.png', 'accessorie1-4.png', 2000.00, 0, 'Black', 9),
+(5, 'Lenevo IdeaCentre AIO 3', 'Desktop Computers', 'Focus: Space-saving all-in-one desktop for home or office.\r\nKey Specs:\r\nIntel/AMD CPUs (e.g., Intel Core i3/i5, AMD Ryzen 3/5).\r\nIntegrated graphics.\r\n24\" or 27\" FHD displays.\r\nSSD or HDD storage.\r\nIntegrated webcam, speakers.', 'desktop4.png', 'desktop4-2.png', 'desktop4-3.png', 'desktop4-4.png', 300000.00, 2, 'White', 9),
+(6, 'Dell PowerEdge T140', 'Desktop Computers', 'Focus: Small business server for basic workloads.\r\nKey Specs:\r\nIntel Xeon E-2200 series processors.\r\nUp to 64GB DDR4 ECC RAM.\r\nMultiple storage bays (HDD, SSD).\r\nRAID support.\r\nBasic remote management.', 'desktop3.png', 'desktop3-2.png', 'desktop3-3.png', 'desktop3-4.png', 600000.00, 0, 'Black', 8),
+(7, 'Lenevo Think Center', 'Desktop Computers', 'Focus: Secure and manageable business desktop.\r\nKey Specs:\r\nIntel Core i3/i5/i7/i9 CPUs.\r\nIntegrated or discrete graphics.\r\nVarious storage options (HDD, SSD).\r\nThinkShield security features.\r\nCompact or tower form factors.', 'desktop2.png', 'desktop2-2.png', 'desktop2-3.png', 'desktop2-4.png', 500000.00, 2, 'Black', 10),
+(8, 'Asus ExpertCenter', 'Desktop Computers', 'Focus: Reliable and secure business desktop.\r\nKey Specs:\r\nIntel Core i3/i5/i7 CPUs.\r\nIntegrated or discrete graphics.\r\nVarious storage options (HDD, SSD).\r\nMultiple connectivity ports.\r\nSecurity features, robust build.', 'desktop1.png', 'desktop1-2.png', 'desktop1-3.png', 'desktop1-4.png', 400000.00, 10, 'Black', 9),
+(9, 'Asus TUF', 'Laptop Computers', 'Focus: Durable and affordable gaming laptops and desktops.\r\nKey Specs (Laptops):\r\nIntel/AMD CPUs (e.g., Intel Core i5/i7, AMD Ryzen 5/7/9).\r\nNVIDIA GeForce RTX graphics (e.g., RTX 3050, 4060, 4070).\r\n15.6\" or 17.3\" FHD/QHD displays, high refresh rates.\r\nSSD storage, expandable RAM.\r\nMIL-STD-810H military-grade durability.\r\nAdvanced cooling systems.', 'featured4.png', 'featured4-2.png', 'featured4-3.png', 'featured4-4.png', 400000.00, 5, 'Black', 10),
+(10, 'Dell Inspiron 16', 'Laptop Computers', 'Focus: Versatile laptop for everyday tasks and productivity.\r\nKey Specs:\r\nIntel/AMD CPUs (e.g., Intel Core i5/i7, AMD Ryzen 5/7).\r\nIntegrated or discrete graphics (e.g., Intel Iris Xe, NVIDIA GeForce MX series).\r\n16\" FHD+ displays, optional touch.\r\nSSD storage, ample RAM.\r\nSleek design, long battery life.', 'featured3.png', 'featured3-2.png', 'featured3-3.png', 'featured3-4.png', 600000.00, 2.5, 'Black', 10),
+(11, 'HP Victus', 'Laptop Computers', 'Focus: Mainstream gaming and multimedia laptop.\r\nKey Specs:\r\nIntel/AMD CPUs (e.g., Intel Core i5/i7, AMD Ryzen 5/7).\r\nNVIDIA GeForce RTX graphics (e.g., RTX 3050, 4060).\r\n15.6\" or 16\" FHD displays, high refresh rates.\r\nSSD storage, expandable RAM.\r\nEnhanced audio, modern design.', 'featured2.png', 'featured2-2.png', 'featured2-3.png', 'featured2-4.png', 500000.00, 2.5, 'Black', 10),
+(12, 'Lenevo LOQ', 'Laptop Computers', 'Focus: Entry-level gaming laptop.\r\nKey Specs:\r\nIntel/AMD CPUs (e.g., Intel Core i5/i7, AMD Ryzen 5/7).\r\nNVIDIA GeForce RTX graphics (e.g., RTX 3050, 4050).\r\n15.6\" or 16\" FHD/QHD displays with high refresh rates.\r\nSSD storage, ample RAM.\r\nGaming-centric thermal design.', 'featured1.png', 'featured1-2.png', 'featured1-3.png', 'featured1-4.png', 400000.00, 2.5, 'Black', 9);
 
 -- --------------------------------------------------------
 
@@ -219,13 +222,13 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `payments`
@@ -237,7 +240,7 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `users`

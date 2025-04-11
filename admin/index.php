@@ -38,17 +38,19 @@ $total_no_of_pages = ceil($total_records / $total_records_per_page);
 
 // $stmt2 = $conn->prepare("SELECT * FROM orders LIMIT $offset, $total_records_per_page");
 $stmt2 = $conn->prepare("SELECT 
-    o.order_id, 
-    o.order_status, 
-    u.user_name, 
-    o.order_date, 
-    o.user_phone, 
+    o.order_id,
+    o.order_cost,
+    o.order_status,
+    o.order_date,
+    u.user_name,
+    o.user_phone,
     o.user_address,
     o.user_city
 FROM 
     orders o
 JOIN 
     users u ON o.user_id = u.user_id
+    ORDER BY o.order_date DESC
     LIMIT $offset, $total_records_per_page");
 $stmt2->execute();
 $orders = $stmt2->get_result();
@@ -71,9 +73,10 @@ $orders = $stmt2->get_result();
         <thead class="table-dark">
             <tr>
                 <th>Order Id</th>
+                <th>Order Cost</th>
                 <th>Order Status</th>
-                <th>User Name</th>
                 <th>Order Date</th>
+                <th>User Name</th>
                 <th>User Phone</th>
                 <th>User Address</th>
                 <th>User City</th>
@@ -86,9 +89,10 @@ $orders = $stmt2->get_result();
         <?php foreach($orders as $order){ ?>
             <tr>
                 <td><?php echo $order['order_id'] ?></td>
-                <td><?php echo $order['order_status'] ?></td>
-                <td><?php echo $order['user_name'] ?></td>
+                <td><?php echo $order['order_cost'] ?></td>
+                <td><?php echo $order['order_status'] ?></td>                
                 <td><?php echo $order['order_date'] ?></td>
+                <td><?php echo $order['user_name'] ?></td>
                 <td><?php echo $order['user_phone'] ?></td>
                 <td><?php echo $order['user_address'] ?></td>
                 <td><?php echo $order['user_city'] ?></td>

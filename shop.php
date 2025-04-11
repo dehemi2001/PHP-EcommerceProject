@@ -78,7 +78,7 @@ if (isset($_POST['search'])) {
 
     //4. get all products
 
-    $stmt2 = $conn->prepare("SELECT * FROM products LIMIT $offset, $total_records_per_page");
+    $stmt2 = $conn->prepare("SELECT * FROM products ORDER BY product_category DESC, product_id DESC LIMIT $offset, $total_records_per_page");
     $stmt2->execute();
     $products = $stmt2->get_result();
 }
@@ -132,7 +132,7 @@ if (isset($_POST['search'])) {
             </div>
 
             <div class="form-group my-3 mx-3">
-                <input type="submit" name="search" value="Search" class="btn btn-primary">
+                <input type="submit" name="search" value="Search" class="btn btn-primary"> <input type="submit" name="reset" value="Reset" class="btn btn-warning">
             </div>
         </form>
     </section>
@@ -141,7 +141,7 @@ if (isset($_POST['search'])) {
     <section id="featured">
         <h3 class="section-title">Our Products</h3>
         <hr>
-        <p>Here you can check out our featured products</p>
+        <p>Here you can check out all our products</p>
         <div class="row mx-auto container">
 
             <?php while ($row = $products->fetch_assoc()) { ?>
