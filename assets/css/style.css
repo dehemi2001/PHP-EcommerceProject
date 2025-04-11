@@ -532,6 +532,20 @@ th:last-child {
     margin: 5px auto;
 }
 
+/* mobile */
+@media only screen and (max-width: 600px) {
+    #register-form {
+        width: 100%;
+        margin: 10px auto;
+        padding: 15px;
+    }
+
+    #register-form input {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
 #register-form #register-btn {
     background-color: #fb774b;
     color: #fff;
@@ -551,6 +565,20 @@ th:last-child {
 
 #account-form input {
     margin: 5px auto;
+}
+
+/* mobile */
+@media only screen and (max-width: 600px) {
+    #account-form {
+        width: 100%;
+        margin: 10px auto;
+        padding: 15px;
+    }
+
+    #account-form input {
+        width: 100%;
+        margin: 10px 0;
+    }
 }
 
 #account-form #change-pass-btn {
