@@ -15,6 +15,9 @@ if(isset($_POST['order_pay_btn'])){
     <?php if(isset($_SESSION['total']) && $_SESSION['total'] !=0 ){ ?>
     <p class="text_center" style="color: green">Order has been placed successfully!</p>
     <a href="account.php#orders">View Orders</a><br><br>
+    <?php }else if(isset($_POST['order_status']) && $_POST['order_status'] == "Not Paid"){ ?>
+        <p class="text_center" style="color: green">Order has been placed successfully!</p>
+        <a href="account.php#orders">View Orders</a><br><br>
     <?php } ?>
         <h2 class="form-weight-bold">Payment</h2>
         <hr class="mx-auto">
