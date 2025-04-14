@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 11, 2025 at 12:28 PM
+-- Generation Time: Apr 14, 2025 at 12:10 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -64,7 +64,9 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`order_id`, `order_cost`, `order_status`, `user_id`, `user_phone`, `user_city`, `user_address`, `order_date`) VALUES
 (1, 802000.00, 'Not Paid', 1, 774075447, 'Negombo', '314/1A, G. D. S. Gamhewa Mawatha, Thimbirigaskatuwa', '2025-04-11 12:26:35'),
-(2, 1500000.00, 'Not Paid', 1, 774075447, 'Negombo', '314/1A, G. D. S. Gamhewa Mawatha, Thimbirigaskatuwa', '2025-04-11 12:27:21');
+(2, 1500000.00, 'Not Paid', 1, 774075447, 'Negombo', '314/1A, G. D. S. Gamhewa Mawatha, Thimbirigaskatuwa', '2025-04-11 12:27:21'),
+(3, 400000.00, 'Not Paid', 1, 774075447, 'Negombo', '314/1A, G. D. S. Gamhewa Mawatha, Thimbirigaskatuwa', '2025-04-12 15:49:23'),
+(4, 600000.00, 'Not Paid', 1, 774075447, 'Negombo', '314/1A, G. D. S. Gamhewa Mawatha, Thimbirigaskatuwa', '2025-04-12 15:54:17');
 
 -- --------------------------------------------------------
 
@@ -88,7 +90,9 @@ INSERT INTO `order_items` (`item_id`, `order_id`, `product_id`, `product_quantit
 (2, 1, 8, 1),
 (3, 1, 4, 1),
 (4, 2, 6, 2),
-(5, 2, 5, 1);
+(5, 2, 5, 1),
+(6, 3, 12, 1),
+(7, 4, 10, 1);
 
 -- --------------------------------------------------------
 
@@ -99,7 +103,6 @@ INSERT INTO `order_items` (`item_id`, `order_id`, `product_id`, `product_quantit
 CREATE TABLE `payments` (
   `payment_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
   `transaction_id` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -138,9 +141,9 @@ INSERT INTO `products` (`product_id`, `product_name`, `product_category`, `produ
 (7, 'Lenevo Think Center', 'Desktop Computers', 'Focus: Secure and manageable business desktop.\r\nKey Specs:\r\nIntel Core i3/i5/i7/i9 CPUs.\r\nIntegrated or discrete graphics.\r\nVarious storage options (HDD, SSD).\r\nThinkShield security features.\r\nCompact or tower form factors.', 'desktop2.png', 'desktop2-2.png', 'desktop2-3.png', 'desktop2-4.png', 500000.00, 2, 'Black', 10),
 (8, 'Asus ExpertCenter', 'Desktop Computers', 'Focus: Reliable and secure business desktop.\r\nKey Specs:\r\nIntel Core i3/i5/i7 CPUs.\r\nIntegrated or discrete graphics.\r\nVarious storage options (HDD, SSD).\r\nMultiple connectivity ports.\r\nSecurity features, robust build.', 'desktop1.png', 'desktop1-2.png', 'desktop1-3.png', 'desktop1-4.png', 400000.00, 10, 'Black', 10),
 (9, 'Asus TUF', 'Laptop Computers', 'Focus: Durable and affordable gaming laptops and desktops.\r\nKey Specs (Laptops):\r\nIntel/AMD CPUs (e.g., Intel Core i5/i7, AMD Ryzen 5/7/9).\r\nNVIDIA GeForce RTX graphics (e.g., RTX 3050, 4060, 4070).\r\n15.6\" or 17.3\" FHD/QHD displays, high refresh rates.\r\nSSD storage, expandable RAM.\r\nMIL-STD-810H military-grade durability.\r\nAdvanced cooling systems.', 'featured4.png', 'featured4-2.png', 'featured4-3.png', 'featured4-4.png', 400000.00, 5, 'Black', 10),
-(10, 'Dell Inspiron 16', 'Laptop Computers', 'Focus: Versatile laptop for everyday tasks and productivity.\r\nKey Specs:\r\nIntel/AMD CPUs (e.g., Intel Core i5/i7, AMD Ryzen 5/7).\r\nIntegrated or discrete graphics (e.g., Intel Iris Xe, NVIDIA GeForce MX series).\r\n16\" FHD+ displays, optional touch.\r\nSSD storage, ample RAM.\r\nSleek design, long battery life.', 'featured3.png', 'featured3-2.png', 'featured3-3.png', 'featured3-4.png', 600000.00, 2.5, 'Black', 10),
+(10, 'Dell Inspiron 16', 'Laptop Computers', 'Focus: Versatile laptop for everyday tasks and productivity.\r\nKey Specs:\r\nIntel/AMD CPUs (e.g., Intel Core i5/i7, AMD Ryzen 5/7).\r\nIntegrated or discrete graphics (e.g., Intel Iris Xe, NVIDIA GeForce MX series).\r\n16\" FHD+ displays, optional touch.\r\nSSD storage, ample RAM.\r\nSleek design, long battery life.', 'featured3.png', 'featured3-2.png', 'featured3-3.png', 'featured3-4.png', 600000.00, 2.5, 'Black', 9),
 (11, 'HP Victus', 'Laptop Computers', 'Focus: Mainstream gaming and multimedia laptop.\r\nKey Specs:\r\nIntel/AMD CPUs (e.g., Intel Core i5/i7, AMD Ryzen 5/7).\r\nNVIDIA GeForce RTX graphics (e.g., RTX 3050, 4060).\r\n15.6\" or 16\" FHD displays, high refresh rates.\r\nSSD storage, expandable RAM.\r\nEnhanced audio, modern design.', 'featured2.png', 'featured2-2.png', 'featured2-3.png', 'featured2-4.png', 500000.00, 2.5, 'Black', 10),
-(12, 'Lenevo LOQ', 'Laptop Computers', 'Focus: Entry-level gaming laptop.\r\nKey Specs:\r\nIntel/AMD CPUs (e.g., Intel Core i5/i7, AMD Ryzen 5/7).\r\nNVIDIA GeForce RTX graphics (e.g., RTX 3050, 4050).\r\n15.6\" or 16\" FHD/QHD displays with high refresh rates.\r\nSSD storage, ample RAM.\r\nGaming-centric thermal design.', 'featured1.png', 'featured1-2.png', 'featured1-3.png', 'featured1-4.png', 400000.00, 2.5, 'Black', 10);
+(12, 'Lenevo LOQ', 'Laptop Computers', 'Focus: Entry-level gaming laptop.\r\nKey Specs:\r\nIntel/AMD CPUs (e.g., Intel Core i5/i7, AMD Ryzen 5/7).\r\nNVIDIA GeForce RTX graphics (e.g., RTX 3050, 4050).\r\n15.6\" or 16\" FHD/QHD displays with high refresh rates.\r\nSSD storage, ample RAM.\r\nGaming-centric thermal design.', 'featured1.png', 'featured1-2.png', 'featured1-3.png', 'featured1-4.png', 400000.00, 2.5, 'Black', 9);
 
 -- --------------------------------------------------------
 
@@ -192,8 +195,7 @@ ALTER TABLE `order_items`
 --
 ALTER TABLE `payments`
   ADD PRIMARY KEY (`payment_id`),
-  ADD KEY `fk_payments_orders` (`order_id`),
-  ADD KEY `fk_payments_users` (`user_id`);
+  ADD KEY `fk_payments_orders` (`order_id`);
 
 --
 -- Indexes for table `products`
@@ -222,13 +224,13 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `payments`
@@ -269,8 +271,7 @@ ALTER TABLE `order_items`
 -- Constraints for table `payments`
 --
 ALTER TABLE `payments`
-  ADD CONSTRAINT `fk_payments_orders` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
-  ADD CONSTRAINT `fk_payments_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+  ADD CONSTRAINT `fk_payments_orders` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
