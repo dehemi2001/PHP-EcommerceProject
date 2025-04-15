@@ -43,9 +43,9 @@ $stmt2 = $conn->prepare("SELECT
     o.order_status,
     o.order_date,
     u.user_name,
-    o.user_phone,
-    o.user_address,
-    o.user_city
+    o.order_phone,
+    o.order_address,
+    o.order_city
 FROM 
     orders o
 JOIN 
@@ -77,9 +77,9 @@ $orders = $stmt2->get_result();
                 <th>Order Status</th>
                 <th>Order Date</th>
                 <th>User Name</th>
-                <th>User Phone</th>
-                <th>User Address</th>
-                <th>User City</th>
+                <th>Order Phone</th>
+                <th>Order Address</th>
+                <th>Order City</th>
                 <th>Edit</th>
                 <th>View</th>
             </tr>
@@ -93,9 +93,9 @@ $orders = $stmt2->get_result();
                 <td><?php echo $order['order_status'] ?></td>                
                 <td><?php echo $order['order_date'] ?></td>
                 <td><?php echo $order['user_name'] ?></td>
-                <td><?php echo $order['user_phone'] ?></td>
-                <td><?php echo $order['user_address'] ?></td>
-                <td><?php echo $order['user_city'] ?></td>
+                <td><?php echo $order['order_phone'] ?></td>
+                <td><?php echo $order['order_address'] ?></td>
+                <td><?php echo $order['order_city'] ?></td>
                 <td><a class="btn btn-primary" href="edit_order.php?order_id=<?php echo $order['order_id'] ?>">Edit</a></td>
                 <td><a class="btn btn-warning" href="view_order.php?order_id=<?php echo $order['order_id'] ?>">View</a></td>
             </tr>
