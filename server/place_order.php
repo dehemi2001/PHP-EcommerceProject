@@ -80,7 +80,11 @@ if (!isset($_SESSION['logged_in'])) {
             $stmt1->execute();
         }
 
-        //5. Inform the user that the order was placed successfully
+        //5. Clear the cart
+        unset($_SESSION['cart']);
+        unset($_SESSION['quantity']);
+
+        //6. Inform the user that the order was placed successfully
         header('location: ../payment.php?order_status=order placed successfully');
     }
 }
