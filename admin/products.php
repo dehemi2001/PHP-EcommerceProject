@@ -108,7 +108,13 @@ $products = $stmt2->get_result();
                 <td><?php echo $product['stock_quantity'] ?></td>
                 <td><a class="btn btn-warning" href="<?php echo "edit_images.php?product_id=".$product['product_id']."&product_name=".$product['product_name']; ?>">Edit Images</a></td>
                 <td><a class="btn btn-primary" href="edit_product.php?product_id=<?php echo $product['product_id']; ?>">Edit</a></td>
-                <td><a class="btn btn-danger" href="delete_product.php?product_id=<?php echo $product['product_id']; ?>">Delete</a></td>
+                <td>
+                    <a class="btn btn-danger" 
+                       href="delete_product.php?product_id=<?php echo $product['product_id']; ?>" 
+                       onclick="return confirm('Are you sure you want to delete this product?');">
+                       Delete
+                    </a>
+                </td>
             </tr>
         <?php } ?>
         </tbody>
