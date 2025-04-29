@@ -86,7 +86,7 @@ if (isset($_SESSION['logged_in'])) {
                         } ?></span></p>
         <p><a href="#orders" id="order-btn">Your Orders</a></p>
         <p><a href="account.php?logout=1" id="logout-btn">Logout</a></p>
-        <a id="logout-btn" href="admin/login.php">Are you an admin? Click Here</a>
+        <a id="logout-btn" href="admin/login.php">Admin Login</a>
       </div>
     </div>
 

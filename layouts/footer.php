@@ -1,4 +1,4 @@
-  <!--Footer-->
+<!--Footer-->
   <footer class="mt-5 py-5">
     <div class="row container mx-auto pt-5">
       <div class="footer-one col-lg-3 col-md-6 col-sm-12">
@@ -34,11 +34,15 @@
       <div class="footer-one col-lg-3 col-md-6 col-sm-12">
         <h5 class="pb-12">Facebook</h5>
         <div class="row">
-          <img src="assets/imgs/featured1.png" class="img-fluid w-25 h-100 m-2">
-          <img src="assets/imgs/featured2.png" class="img-fluid w-25 h-100 m-2">
-          <img src="assets/imgs/featured3.png" class="img-fluid w-25 h-100 m-2">
-          <img src="assets/imgs/featured4.png" class="img-fluid w-25 h-100 m-2">
-          <img src="assets/imgs/desktop1.png" class="img-fluid w-25 h-100 m-2">
+
+        <?php include('server/get_laptops.php') ?>
+
+        <?php while ($row = $laptop_products->fetch_assoc()) { ?>
+
+          <img src="assets/imgs/<?php echo $row['product_image']; ?>" class="img-fluid w-25 h-100 m-2">
+
+        <?php } ?>
+
         </div>
       </div>
     </div>

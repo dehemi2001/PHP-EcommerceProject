@@ -65,8 +65,9 @@ if(isset($_POST['login_btn'])){
                 <input type="submit" class="btn" id="login-btn" name="login_btn" value="Login">
             </div>
             <div class="form-group">
+                <a id="register-url" href="forgot_password.php" class="btn">Forgot Password?</a><br>
                 <a id="register-url" href="register.php" class="btn">Don't have an account? Register</a><br>
-                <a id="register-url" href="admin/login.php" class="btn">Are you an admin? Click Here</a>
+                <a id="register-url" href="admin/login.php" class="btn">Admin Login</a>
             </div>
         </form>
     </div>
