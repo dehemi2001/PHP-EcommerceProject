@@ -55,7 +55,7 @@ if(isset($_POST['login_btn'])){
           <p style="color:red" class="text-center"><?php if(isset($_GET['error'])){ echo $_GET['error']; } ?></p>
             <div class="form-group">
                 <label>Email</label>
-                <input type="text" class="form-control" id="login-email" name="email" placeholder="Email" required>
+                <input type="email" class="form-control" id="login-email" name="email" placeholder="Email" required>
             </div>
             <div class="form-group">
                 <label>Password</label>

@@ -528,6 +528,43 @@ th:last-child {
     color: #fb774b;
 }
 
+/* Forgot Password */
+#forgot-password-form {
+    width: 50%;
+    margin: 5px auto;
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid #fb774b;
+}
+
+#forgot-password-form input {
+    width: 50%;
+    margin: 5px auto;
+}
+
+/* Mobile responsiveness */
+@media only screen and (max-width: 600px) {
+    #forgot-password-form {
+        width: 100%;
+        margin: 10px auto;
+        padding: 15px;
+    }
+
+    #forgot-password-form input {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+#forgot-password-form #password-reset-btn {
+    background-color: #fb774b;
+    color: #fff;
+}
+
+#forgot-password-form #register-url {
+    color: #fb774b;
+}
+
 /* Register */
 #register-form {
     width: 50%;
