@@ -1,4 +1,9 @@
-<?php 
+<?php
+
+//Import PHPMailer classes into the global namespace
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+
 include('header.php');
 
 if (isset($_GET['order_id'])) {
@@ -19,6 +24,95 @@ if (isset($_GET['order_id'])) {
     $stmt->bind_param('si', $order_status, $order_id);
 
     if($stmt->execute()){
+        //send email to user
+
+        $stmt = $conn->prepare("SELECT * FROM admins LIMIT 1");
+        $stmt->execute();
+        $admins = $stmt->get_result();
+        $admin = $admins->fetch_assoc();
+
+        $admin_email = $admin['admin_email'];
+        $app_password = $admin['app_password'];
+
+        $stmt = $conn->prepare("SELECT * FROM orders WHERE order_id = ?");
+        $stmt->bind_param("i", $order_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $order = $result->fetch_assoc();
+        $user_id = $order['user_id'];
+
+        $stmt = $conn->prepare("SELECT * FROM users WHERE user_id = ?");
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+        $user_email = $user['user_email'];
+        $user_name = $user['user_name'];
+        $order_status = $order['order_status'];
+        $order_id = $order['order_id'];
+
+        require '../vendor/autoload.php';
+        $mail = new PHPMailer();
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Port = 465;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->SMTPAuth = true;
+        $mail->Username = $admin_email;
+        $mail->Password = $app_password;
+        $mail->setFrom($admin_email, 'Solid Computers');
+        $mail->addAddress($user_email);
+        $mail->Subject = 'Order Status of Order ID: ' . $order_id;
+        $mail->msgHTML("
+            <html>
+            <head>
+                <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    line-height: 1.6;
+                }
+                .email-container {
+                    padding: 20px;
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    background-color: #f9f9f9;
+                }
+                .email-header {
+                    font-size: 18px;
+                    font-weight: bold;
+                    margin-bottom: 10px;
+                }
+                .email-body {
+                    margin-bottom: 20px;
+                }
+                .email-footer {
+                    font-size: 12px;
+                    color: #555;
+                }
+                </style>
+            </head>
+            <body>
+                <div class='email-container'>
+                <div class='email-header'>Order Status Update</div>
+                <div class='email-body'>
+                    Dear $user_name,<br><br>
+                    Your order with the order ID <strong>$order_id</strong> has been <strong>" . strtolower($order_status) . "</strong>.<br><br>
+                    Thank you for shopping with us.<br><br>
+                    Best regards,<br>
+                    Solid Computers
+                </div>
+                <div class='email-footer'>
+                    This is an automated message. Please do not reply to this email.
+                </div>
+                </div>
+            </body>
+            </html>
+        ");
+        if (!$mail->send()) {
+            echo 'Mailer Error: ' . $mail->ErrorInfo;
+        } else {
+            // echo 'Email sent successfully';
+        }
         header('Location: index.php?order_updated=Order has been updated successfully');
     }else{
         header('Location: products.php?order_failed=Could not update order');

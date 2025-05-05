@@ -1,5 +1,9 @@
 <?php
 
+//Import PHPMailer classes into the global namespace
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+
 session_start();
 
 include('connection.php');
@@ -36,8 +40,6 @@ if (!isset($_SESSION['logged_in'])) {
         }
 
         //2. If stock is sufficient, insert order into the orders table
-        $name = $_POST['name'];
-        $email = $_POST['email'];
         $phone = $_POST['phone'];
         $city = $_POST['city'];
         $address = $_POST['address'];
@@ -80,11 +82,154 @@ if (!isset($_SESSION['logged_in'])) {
             $stmt1->execute();
         }
 
-        //5. Clear the cart
+        //5. Send an email to the user with order details
+
+        $stmt = $conn->prepare("SELECT * FROM admins LIMIT 1");
+        $stmt->execute();
+        $admins = $stmt->get_result();
+        $admin = $admins->fetch_assoc();
+
+        $admin_email = $admin['admin_email'];
+        $app_password = $admin['app_password'];
+        $user_email = $_SESSION['user_email'];
+
+        require '../vendor/autoload.php';
+        $mail = new PHPMailer();
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Port = 465;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->SMTPAuth = true;
+        $mail->Username = $admin_email;
+        $mail->Password = $app_password;
+        $mail->setFrom($admin_email, "Solid Computers");
+        $mail->addAddress($user_email);
+        $mail->Subject = 'Order Confirmation for Order ID: ' . $order_id;
+        $mail->msgHTML("
+            <html>
+            <head>
+            <style>
+            body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+            }
+            .email-container {
+                padding: 20px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                background-color: #f9f9f9;
+            }
+            .email-header {
+                font-size: 18px;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+            .email-body {
+                margin-bottom: 20px;
+            }
+            .email-footer {
+                font-size: 12px;
+                color: #555;
+            }
+            </style>
+            </head>
+            <body>
+            <div class='email-container'>
+            <div class='email-header'>Order Confirmation</div>
+            <div class='email-body'>
+                Dear Customer,<br><br>
+                Thank you for shopping with us. Your order has been placed successfully.<br><br>
+                <strong>Order Details:</strong><br>
+                <ul>
+                <li><strong>Order ID:</strong> $order_id</li>
+                <li><strong>Total Amount:</strong> LKR $order_cost</li>
+                </ul>
+                We appreciate your business and look forward to serving you again.<br><br>
+                Best regards,<br>
+                Solid Computers
+            </div>
+            <div class='email-footer'>
+                This is an automated message. Please do not reply to this email.
+            </div>
+            </div>
+            </body>
+            </html>
+        ");
+        if (!$mail->send()) {
+            echo 'Mailer Error: ' . $mail->ErrorInfo;
+        } else {
+            // Email sent successfully
+        }
+
+        //6. Send an email to the admin with order details
+        $admin_email = 'dp.dehemisuvipul@gmail.com'; // Use your admin email
+        $mail->clearAddresses(); // Clear previous recipients
+        $mail->addAddress($admin_email);
+        $mail->Subject = 'New Order Received (Order ID: ' . $order_id . ')';
+        $mail->msgHTML("
+            <html>
+            <head>
+            <style>
+            body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+            }
+            .email-container {
+                padding: 20px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                background-color: #f9f9f9;
+            }
+            .email-header {
+                font-size: 18px;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+            .email-body {
+                margin-bottom: 20px;
+            }
+            .email-footer {
+                font-size: 12px;
+                color: #555;
+            }
+            </style>
+            </head>
+            <body>
+            <div class='email-container'>
+            <div class='email-header'>New Order Notification</div>
+            <div class='email-body'>
+                A new order has been placed.<br><br>
+                <strong>Order Details:</strong><br>
+                <ul>
+                <li><strong>Order ID:</strong> $order_id</li>
+                <li><strong>Total Amount:</strong> LKR $order_cost</li>
+                </ul>
+                <strong>Customer Details:</strong><br>
+                <ul>
+                <li><strong>Email:</strong> $user_email</li>
+                <li><strong>Phone:</strong> $phone</li>
+                <li><strong>Address:</strong> $address</li>
+                </ul>
+                Please process the order at your earliest convenience.<br>
+            </div>
+            <div class='email-footer'>
+                This is an automated message. Please do not reply to this email.
+            </div>
+            </div>
+            </body>
+            </html>
+        ");
+        if (!$mail->send()) {
+            echo 'Mailer Error: ' . $mail->ErrorInfo;
+        } else {
+            // Email sent successfully
+        }
+
+        //7. Clear the cart
         unset($_SESSION['cart']);
         unset($_SESSION['quantity']);
 
-        //6. Inform the user that the order was placed successfully
+        //8. Inform the user that the order was placed successfully
         header('location: ../payment.php?order_status=order placed successfully');
     }
 }

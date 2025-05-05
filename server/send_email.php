@@ -22,6 +22,14 @@ if($result->num_rows > 0){
 
     $new_password = bin2hex(random_bytes(4)); // Generate a random password
 
+    $stmt = $conn->prepare("SELECT * FROM admins LIMIT 1");
+    $stmt->execute();
+    $admins = $stmt->get_result();
+    $admin = $admins->fetch_assoc();
+
+    $admin_email = $admin['admin_email'];
+    $app_password = $admin['app_password'];
+
 /**
  * This example shows settings to use when sending via Google's Gmail servers.
  * This uses traditional id & password authentication - look at the gmail_xoauth.phps
@@ -63,20 +71,20 @@ $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
 $mail->SMTPAuth = true;
 
 //Username to use for SMTP authentication - use full email address for gmail
-$mail->Username = 'dp.dehemisuvipul@gmail.com';
+$mail->Username = $admin_email;
 
 //Password to use for SMTP authentication
-$mail->Password = 'exct hyza uvze limc';
+$mail->Password = $app_password;
 
 //Set who the message is to be sent from
 //Note that with gmail you can only use your account address (same as `Username`)
 //or predefined aliases that you have configured within your account.
 //Do not use user-submitted addresses in here
-$mail->setFrom('dp.dehemisuvipul@gmail.com', 'Dehemi Patabendige');
+$mail->setFrom($admin_email, 'Solid Computers');
 
 //Set an alternative reply-to address
 //This is a good place to put user-submitted addresses
-$mail->addReplyTo('dp.dehemisuvipul@gmail.com', 'Dehemi Patabendige');
+// $mail->addReplyTo($admin_email, 'Solid Computers');
 
 //Set who the message is to be sent to
 $mail->addAddress($user_email);
@@ -86,7 +94,52 @@ $mail->Subject = 'New Password';
 
 //Read an HTML message body from an external file, convert referenced images to embedded,
 //convert HTML into a basic plain-text alternative body
-$mail->msgHTML("Use this password to login: $new_password");
+$mail->msgHTML("
+    <html>
+    <head>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    .email-container {
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+    .email-header {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    .email-body {
+        margin-bottom: 20px;
+    }
+    .email-footer {
+        font-size: 12px;
+        color: #555;
+    }
+    </style>
+    </head>
+    <body>
+    <div class='email-container'>
+    <div class='email-header'>Password Reset</div>
+    <div class='email-body'>
+        Dear User,<br><br>
+        Your password has been reset successfully. Please use the following password to log in:<br><br>
+        <strong>New Password:</strong> $new_password<br><br>
+        We recommend changing your password after logging in.<br><br>
+        Best regards,<br>
+        Solid Computers
+    </div>
+    <div class='email-footer'>
+        This is an automated message. Please do not reply to this email.
+    </div>
+    </div>
+    </body>
+    </html>
+");
 
 //Replace the plain text body with one created manually
 //$mail->AltBody = 'This is a plain-text message body';
